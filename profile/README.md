@@ -2,6 +2,14 @@
 
 An automated, GitOps-driven Internal Developer Platform (IDP) engineered to provision fully isolated, ephemeral Kubernetes preview environments per Pull Request. Designed to reduce CI/CD feedback loops and eliminate staging server cloud waste through aggressive FinOps resource reclamation.
 
+## Platform Evolution & Status
+
+| Phase | Target Scope | Current Status |
+| :--- | :--- | :--- |
+| **Phase 1.1** | Proxmox Host Hardening, DMZ Network, K3s Cluster | 🟢 **In Progress (Current MVP)** |
+| **Phase 1.2** | Ephemeral VMs via OpenTofu & Ansible testing | ⚪ *Planned* |
+| **Phase 2.0** | Hexagonal Architecture Control Plane Refactoring | ⚪ *Planned* |
+
 ## Architecture & Separation of Duties (SoD)
 
 To enforce strict **Zero Trust** security boundaries and prevent unauthorized privilege escalation, the platform decouples application workloads, cluster state, and bare-metal hypervisor infrastructure across five specialized repositories:

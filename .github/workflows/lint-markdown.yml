@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - '**/*.md'
-      - '.github/workflows/lint-markdown.yml'
 
 permissions:
   contents: read

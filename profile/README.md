@@ -31,3 +31,8 @@ flowchart TB
 | **[cluster-state-gitops](https://github.com/preview-env-idp/cluster-state-gitops)** | Overlay / SSOT | Single Source of Truth for **ArgoCD**. Contains Kubernetes manifests, Helm charts, and **SOPS + Age** encrypted secrets. Read-only for cluster controllers. |
 | **[platform-reaper-bot](https://github.com/preview-env-idp/platform-reaper-bot)** | Automation / FinOps | Custom operator (Go/Python) handling GitHub webhook events, SoD enforcement, and rolling TTL lifecycle management (Reaper). |
 | **[sample-tenant-app](https://github.com/preview-env-idp/sample-tenant-app)** | Tenant Workload | A sample microservice application utilized to trigger and validate automated preview environment deployments. |
+
+## How to deploy the platform
+
+1. **Proxmox Installation:** You must have Proxmox VE installed on your bare-metal machine. If you have not done this yet, follow the [official guide](https://www.proxmox.com/en/products/proxmox-virtual-environment/get-started)
+2. **Next Steps:** Navigate to Runbook 001 in this repository and execute the initial bootstrapping instructions (`.github/docs/02-runbooks/001-ssh-keys.md`).

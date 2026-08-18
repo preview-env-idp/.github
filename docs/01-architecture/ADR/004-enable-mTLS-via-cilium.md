@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-While Edge Authentication (Cloudflare Tunnels) secures North-South traffic entering the cluster, East-West traffic (pod-to-pod communication) remains unencrypted by default. In a strict Zero Trust architecture, the internal network must be treated as hostile. 
+While Edge Authentication (Cloudflare Tunnels) secures North-South traffic entering the cluster, East-West traffic (pod-to-pod communication) remains unencrypted by default. In a strict Zero Trust architecture, the internal network must be treated as hostile.
 
 If a tenant's ephemeral environment is compromised via a vulnerability (e.g., RCE) in the deployed application, an attacker could potentially escalate the attack by eavesdropping on internal network interfaces (packet sniffing). Unencrypted HTTP traffic between the `cloudflared` daemon and the Ingress Controller, or between internal microservices, could expose sensitive metadata or payload data.
 
@@ -14,7 +14,7 @@ Standard Mutual TLS (mTLS) implementations typically require complex Certificate
 
 ## Decision
 
-We will enforce transparent encryption for all East-West traffic at the kernel level by enabling Cilium's WireGuard integration (`encryption.type=wireguard`). 
+We will enforce transparent encryption for all East-West traffic at the kernel level by enabling Cilium's WireGuard integration (`encryption.type=wireguard`).
 
 Using eBPF, Cilium will automatically intercept and encrypt packets leaving the pod's virtual network interface before they traverse the host's network stack, and decrypt them immediately before delivery to the destination pod.
 

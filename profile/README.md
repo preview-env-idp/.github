@@ -26,7 +26,7 @@ flowchart TB
 
 | Repository | Layer | Purpose & Technology Stack |
 | :--- | :--- | :--- |
-| **[.github](https://github.com/preview-env-idp/.github)** | Control Plane | Global organization profile, security baselines (`SECURITY.md`), and compliance governance. |
+| **[.github](https://github.com/preview-env-idp/.github)** | Control Plane | Global organization profile, security baselines, and compliance governance. |
 | **[infra-core-iac](https://github.com/preview-env-idp/infra-core-iac)** | Underlay / Layer 1 | Proxmox VE bare-metal hardening, Linux L2/L3 network isolation, `nftables` firewalls, and **OpenTofu** virtualization provisioning. |
 | **[cluster-state-gitops](https://github.com/preview-env-idp/cluster-state-gitops)** | Overlay / SSOT | Single Source of Truth for **ArgoCD**. Contains Kubernetes manifests, Helm charts, and **SOPS + Age** encrypted secrets. Read-only for cluster controllers. |
 | **[platform-reaper-bot](https://github.com/preview-env-idp/platform-reaper-bot)** | Automation / FinOps | Custom operator (Go/Python) handling GitHub webhook events, SoD enforcement, and rolling TTL lifecycle management (Reaper). |

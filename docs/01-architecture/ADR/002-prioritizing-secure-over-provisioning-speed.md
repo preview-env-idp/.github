@@ -7,6 +7,7 @@ Accepted
 ## Context
 
 The Alcambic platform provisions ephemeral environments (namespaces) triggered by Pull Requests. A fundamental architectural tension exists between two paradigms:
+
 1. Optimizing for the lowest possible CI/CD feedback loop latency and minimal resource overhead.
 2. Optimizing for Zero Trust, preventing container escapes, and minimizing the blast radius of a compromised ephemeral workload.
 
@@ -14,9 +15,10 @@ Since the Git repository acts as the Single Source of Truth in our GitOps pipeli
 
 ## Decision
 
-We choose to enforce a strict "Secure by Default" and Policy-as-Code architecture, even at the cost of control plane latency and increased computational overhead. 
+We choose to enforce a strict "Secure by Default" and Policy-as-Code architecture, even at the cost of control plane latency and increased computational overhead.
 
 Specifically, we will:
+
 1. Implement Validating Admission Webhooks (via Kyverno) to intercept and evaluate every API request before it is persisted to the state store.
 2. Reject any workload manifest that attempts to escalate privileges, mount host paths, or lacks explicitly defined CPU/Memory requests and limits.
 3. Enforce L2/L3 network isolation assuming the workload is hostile.

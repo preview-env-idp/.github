@@ -1,42 +1,53 @@
-# Runbook 001: Proxmox SSH Bootstrap
+# Runbook 001: Proxmox SSH Bootstrap & Agent Configuration
 
 ## 1. Objective
 
-Establish initial SSH connection to Proxmox using a dedicated automation key. This key is temporarily injected into the `root` account. During the automated IaC bootstrapping phase, this key will be migrated to a dedicated service account, and the `root` SSH access will be permanently disabled.
+Establish an initial, secure SSH connection to the bare-metal Proxmox hypervisor using a passphrase-protected Ed25519 automation key. This key is temporarily injected into the default `root` account. During the automated Ansible Day-0 bootstrapping phase, this identity will be transferred to a dedicated operations account (`alcambic-admin`), and direct `root` SSH access will be permanently cryptographically severed.
 
 ## 2. Prerequisites
 
-- Target Proxmox node static IP address.
+- Target Proxmox node static IP address accessible via management LAN (`vmbr0`).
 - Target Proxmox initial `root` password.
+- Operator workstation with `ssh-agent` running.
 
 ## 3. Execution Steps
 
-### 3.1. Generate Automation Key
+### 3.1. Generate Hardened Automation Key
 
-Create the persistent identity for the Ansible bot on the Operator's workstation:
+Create the persistent identity for the CI/CD works.
+**CRITICAL:** You MUST provide a strong passphrase when prompted.
 
 ```bash
-ssh-keygen -t ed25519 -C "alcambic-automation-bot" -f ~/.ssh/id_ed25519_alcambic_bot
+ssh-keygen -t ed25519 -a 100 -C "alcambic-ci-cd-key" -f ~/.ssh/id_ed25519_alcambic
 ```
 
-### 3.2. Inject Key to Hypervisor
+### 3.2. Load Key into SSH Agent
 
-Push the public key to the Proxmox `root` account temporarily. Enter the `root` password when prompted.
+To prevent deadlocks (waiting for standard input during parallel executions) during use of external applications (like Ansible), decrypt the key and load it into the local SSH agent memory.
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519_alcambic
+```
+
+### 3.3. Inject Key to Hypervisor
+
+Push the public key to the Proxmox `root` account temporarily. Enter the hypervisor's `root` password when prompted.
 
 ```bash
 export PROXMOX_IP="<INSERT_PROXMOX_IP_HERE>"
-ssh-copy-id -i ~/.ssh/id_ed25519_alcambic_bot.pub root@${PROXMOX_IP}
+ssh-copy-id -i ~/.ssh/id_ed25519_alcambic.pub root@${PROXMOX_IP}
 ```
 
-### 3.3. Verify Connection
+### 3.4. Verify Passwordless Execution
 
-Confirm the key is accepted without a password prompt.
+Confirm the key is accepted via the agent without a password prompt.
 
 ```bash
-ssh -i ~/.ssh/id_ed25519_alcambic_bot root@${PROXMOX_IP}
+ssh -i ~/.ssh/id_ed25519_alcambic root@${PROXMOX_IP} "echo 'SSH connection successful.'"
 ```
 
 ## 4. Next steps
 
 - **Target Repository:** `infra-core-iac`
-- **Next Runbook:** `docs/02-runbooks/001-ansible-hypervisor-setup.md`
+- **Next Action:** Will be pushed soon.

@@ -34,5 +34,4 @@ flowchart TB
 
 ## How to deploy the platform
 
-1. **Proxmox Installation:** You must have Proxmox VE installed on your bare-metal machine. If you have not done this yet, follow the [official guide](https://www.proxmox.com/en/products/proxmox-virtual-environment/get-started)
-2. **Next Steps:** Navigate to Runbook 001 in this repository and execute the initial bootstrapping instructions (`.github/docs/02-runbooks/001-ssh-keys.md`).
+Go to `GETTING_STARTED.md` in this repository to get more information about prerequisities.

@@ -6,7 +6,7 @@ If your Proxmox VE has an account named *alcambic* note that this project will b
 
 ## Proxmox Datacenter Firewall
 
-This project after running the ansible scripts will set also the Datacenter firewall so it not only deny by default all incoming traffic but also dany all outgoing traffic if it is not on the list to allow which is being configured in [pve_firewall](../../../infra-core-iac/src/ansible/roles/pve_firewall/tasks/main.yaml) file. If you need custom ports to be allowed in/out or NFS (port 111) **check this file and make apriopriate changes** so it's suits you. 
+This project after running the ansible scripts will set also the Datacenter firewall so it not only deny by default all incoming traffic but also dany all outgoing traffic if it is not on the list to allow which is being configured in [pve_firewall](../../../infra-core-iac/src/ansible/roles/pve_firewall/tasks/main.yaml) file. If you need custom ports to be allowed in/out or NFS (port 111) **check this file and make apriopriate changes** so it's suits you.
 
 *Note:* only IPs from internal network (specified by `management_subnet_cidr` variable) will be able to access proxox cluster (by SSH, GUI, SPICE).
 

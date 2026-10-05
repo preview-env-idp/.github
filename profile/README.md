@@ -34,4 +34,4 @@ flowchart TB
 
 ## How to deploy the platform
 
-Go to `GETTING_STARTED.md` in this repository to get more information about prerequisities.
+Go to [GETTING_STARTED.md](../GETTING_STARTED.md) in this repository to get more information about prerequisities.

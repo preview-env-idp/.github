@@ -23,6 +23,7 @@ The local control plane used to trigger the deployment requires strict dependenc
     sudo apt update && sudo apt install make -y
 
 - **Python Virtual Environment:** To prevent System Blast Radius and Dependency Hell we use python virtual environment. The system requires only the native Python virtual environment package to bootstrap the isolated toolchain. Then the project will automatically build venv for you when stepping forward to `make bootstrap-pve` command.
+
   ```bash
   sudo apt update && sudo apt install python3-venv -y
   ```
